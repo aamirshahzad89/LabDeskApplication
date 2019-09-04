@@ -1,0 +1,243 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@*@model IEnumerable<LabDeskApplication.Models.Log03InitialStyle>*@
+@model PagedList.IPagedList<LabDeskApplication.Models.Log03InitialStyle>
+
+@{
+    ViewBag.Title = "FetchData";
+}
+
+@*<h2>FetchData</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<br />
+@using (Html.BeginForm("FetchData", "Fetch", FormMethod.Get))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @if (User.Identity.AuthenticationType == "")
+            {<h3 class="panel-title"><b>User Panel</b></h3>}
+            else
+            {<h3 class="panel-title"><b>Admin Panel</b></h3>}
+        </div>
+        <div class="panel-body">
+
+            <div class="custom-control custom-radio">
+                <div class="radio-inline">
+                    @Html.RadioButton("SearchBy", "LabID", true,
+                 new { id = "LabID" }) Laboratory-Id
+
+                    <div class="radio-inline">
+                        @Html.RadioButton("SearchBy", "StyleCode",
+                 new { id = "StyleCode" }) Style-Code
+                    </div>
+                </div>
+                @*@if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="radio-inline">
+                            @Html.RadioButton("SearchBy", "StyleCode",
+                     new { id = "StyleCode" }) Style-Code
+                        </div>
+                    }*@
+                <div class="form-inline">
+                    @Html.TextBox("Search", null, new { @class = "form-control" })
+                    <input type="submit" class="btn btn-primary" value="Search" />
+                    <div class="pull-right"><a href="~/ReportData/View/ReportVisual.aspx" class="btn btn-success">View Report</a></div>
+                </div>
+                <br />
+
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr style="color:white; background-color:#343a40">
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().LogInitialArticle.LogInitialVendor.LabID)
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.LogInitialArticle.LogInitialVendor.SetupVendor.VendorName)*@
+                            Vendor
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().LogInitialArticle.StyleCode)
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.SetupArticleType.ArticleType)*@
+                            Article Type
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.SetupColour.ColourName)*@
+                            Colour
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.SetupUserInfo.UserName)*@
+                            Tested by
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.First().SampleDate)*@
+                            Sample Rec.
+                        </th>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.First().Sample)
+                            </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Volume)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Year)
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.First().Remarks)*@
+                            Result
+                        </th>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Width)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.First().Width)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Remarks)
+                            </th>*@
+                        @*<th></th>*@
+                    </tr>
+
+                    @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LogInitialArticle.LogInitialVendor.LabID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LogInitialArticle.LogInitialVendor.SetupVendor.VendorName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LogInitialArticle.StyleCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SetupArticleType.ArticleType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SetupColour.ColourName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SetupUserInfo.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SampleDate)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Sample)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Volume)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Year)
+                            </td>
+                            <td style="font-size:medium; background-color:lightyellow; font-weight:550; color:black;">
+                                @Html.DisplayFor(modelItem => item.SetupResult.ResultName)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Width)
+                                </td>*@
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Width)
+                                </td>*@
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.Remarks)
+                                </td>*@
+                            @*<td>
+                                    @Html.ActionLink("Edit", "Edit", new { id=item.StyleID }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.StyleID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.StyleID })
+                                </td>*@
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            @*@if (User.Identity.AuthenticationType == "")
+                {
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                        <div class="panel-body">
+                            <td>
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            Final Result
+                                            @Html.DisplayNameFor(model => model.OverAllRemarks)
+                                        </th>
+                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <td style="font-size:35px;">
+                                            <b>
+                                                @Html.DisplayFor(modelItem => item.ValueResult.ResultName)
+                                                @Html.DisplayFor(modelItem => item.Lab_Result5.ResultName)
+                                            </b>
+                                        </td>
+                                    }
+                                </table>
+                            </td>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Comments</h3>
+                        </div>
+                        <div class="panel-body">
+                            <td>
+                                <table class="table">
+                                    @foreach (var item in Model)
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OverAllRemarks)
+                                        </td>
+                                    }
+                                </table>
+                            </td>
+                        </div>
+                    </div>
+                }*@
+        </div>
+    </div>
+}
+<ul class="pagination; text-center">
+    @Html.PagedListPager(Model, page => Url.Action("FetchData", new { page, Search = Request.QueryString["Search"] }))
+</ul>
+
+
+<script type="text/javascript">
+    document.querySelector("#IntoAction").addEventListener("change", function (evt) {
+        var parser = new DOMParser;
+        var dom = parser.parseFromString(`@ViewData["DBMySkillsJson"]`, 'text/html');
+        var DBMySkillsJson = JSON.parse(dom.body.textContent);
+        var currRow = {};
+        DBMySkillsJson.forEach(function (item) {
+            if (item.TestApproachID == evt.target.value) {
+                currRow = item;
+            }
+        });
+        if (Object.keys(currRow).length) {
+            document.getElementById('txt_SelectedText').value = evt.target.value;
+            document.getElementById('lbl_TestValues01').innerHTML = currRow.TestApproachName01 ? currRow.TestApproachName01 : "Test's Value 01";
+            document.getElementById('lbl_TestValues02').innerHTML = currRow.TestApproachName02 ? currRow.TestApproachName02 : "Test's Value 02";
+            document.getElementById('lbl_TestValues03').innerHTML = currRow.TestApproachName03 ? currRow.TestApproachName03 : "Test's Value 03";
+            document.getElementById('lbl_TestValues04').innerHTML = currRow.TestApproachName04 ? currRow.TestApproachName04 : "Test's Value 04";
+            document.getElementById('lbl_TestValues05').innerHTML = currRow.TestApproachName05 ? currRow.TestApproachName05 : "Test's Value 05";
+        } else {
+            document.getElementById('txt_SelectedText').value = "";
+            document.getElementById('lbl_TestValues01').innerHTML = "Test's Value 01";
+            document.getElementById('lbl_TestValues02').innerHTML = "Test's Value 02";
+            document.getElementById('lbl_TestValues03').innerHTML = "Test's Value 03";
+            document.getElementById('lbl_TestValues04').innerHTML = "Test's Value 04";
+            document.getElementById('lbl_TestValues05').innerHTML = "Test's Value 05";
+        }
+    });
+</script>

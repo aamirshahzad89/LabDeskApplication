@@ -1,0 +1,84 @@
+﻿@model IEnumerable<LabDeskApplication.Models.TestApproach>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lab Test's &amp; Approaches - Index</h2>
+<p>
+    @Html.ActionLink("New Test & Approches", "Create", null, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Test's Values - (Result Log)", "Index", "TestValues", null, new { @class = "btn btn-info" })
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th style="width:5%">
+                @Html.DisplayNameFor(model => model.TestApproachID)
+            </th>
+            <th style="width:20%">
+                @Html.DisplayNameFor(model => model.TestName)
+            </th>
+            <th style="width:25%">
+                @Html.DisplayNameFor(model => model.TestStandard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestApproachName01)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestApproachName02)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TestApproachName03)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestApproachName04)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TestApproachName05)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>*@
+            <th>Tasks</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestApproachID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestStandard)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestApproachName01)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestApproachName02)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TestApproachName03)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TestApproachName04)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TestApproachName05)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TestApproachID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TestApproachID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TestApproachID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,242 @@
+﻿@model LabDeskApplication.Models.TestValues
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    var Labid = "";
+    try
+    {
+        Labid = Request.Url.Segments[3];
+    }
+    catch { }
+}
+
+@if (Labid != "")
+{
+    <h2 style="color: forestgreen">Create (Test Result of Style# :@Labid)</h2>
+}
+else
+{
+    <h2 style="color: hotpink">Create - (Result - Manually)</h2>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Finalizing SRF (Test's Result)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TestDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Selected Test ID #:</label>
+            <div class="col-md-10">
+                @*@Html.RadioButton("SearchBy", "Name", true) <text> Name </text>*@
+                @Html.Editor("Search", new { htmlAttributes = new { @class = "form-control", @id = "txt_SelectedText", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestApproachID, "TestApproachID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TestApproachID", (IEnumerable<SelectListItem>)ViewData["DBMySkills"], "--Select a specific test--", htmlAttributes: new { @class = "form-control", @id = "IntoAction" })
+                @*@Html.DropDownList("TestApproachID", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.TestApproachID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestValues01, htmlAttributes: new { @class = "control-label col-md-2", @id = "lbl_TestValues01" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestValues01, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TestValues01, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestValues02, htmlAttributes: new { @class = "control-label col-md-2", @id = "lbl_TestValues02" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestValues02, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TestValues02, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestValues03, htmlAttributes: new { @class = "control-label col-md-2", @id = "lbl_TestValues03" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestValues03, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TestValues03, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestValues04, htmlAttributes: new { @class = "control-label col-md-2", @id = "lbl_TestValues04" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestValues04, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TestValues04, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TestValues05, htmlAttributes: new { @class = "control-label col-md-2", @id = "lbl_TestValues05" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestValues05, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TestValues05, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResultID, "Result", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ResultID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ResultID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Labid != "")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.StyleID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StyleID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = Labid } })
+                    @Html.ValidationMessageFor(model => model.StyleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.StyleID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("StyleID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StyleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Record" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+<div>
+    @Html.ActionLink("Back (SRF's Result)", "Index", null, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Create New Result", "Create", "SetupResults", null, new { @class = "btn btn-default btn-sm" })
+    @Html.ActionLink("Create New Test & Approaches", "Create", "TestApproaches", null, new { @class = "btn btn-default btn-sm" })<br /><br />
+    @if (Labid != "")
+    {
+        <a data-target="#myModal" role="button" class="btn btn-warning btn-lg" data-toggle="modal">Set Final Status of @Labid</a>
+    }
+</div>
+
+<script type="text/javascript">
+    document.querySelector("#IntoAction").addEventListener("change", function (evt) {
+        var parser = new DOMParser;
+        var dom = parser.parseFromString(`@ViewData["DBMySkillsJson"]`, 'text/html');
+        var DBMySkillsJson = JSON.parse(dom.body.textContent);
+        var currRow = {};
+        DBMySkillsJson.forEach(function (item) {
+            if (item.TestApproachID == evt.target.value) {
+                currRow = item;
+            }
+        });
+        if (Object.keys(currRow).length) {
+            document.getElementById('txt_SelectedText').value = evt.target.value;
+            document.getElementById('lbl_TestValues01').innerHTML = currRow.TestApproachName01 ? currRow.TestApproachName01 : "Test's Value 01";
+            document.getElementById('lbl_TestValues02').innerHTML = currRow.TestApproachName02 ? currRow.TestApproachName02 : "Test's Value 02";
+            document.getElementById('lbl_TestValues03').innerHTML = currRow.TestApproachName03 ? currRow.TestApproachName03 : "Test's Value 03";
+            document.getElementById('lbl_TestValues04').innerHTML = currRow.TestApproachName04 ? currRow.TestApproachName04 : "Test's Value 04";
+            document.getElementById('lbl_TestValues05').innerHTML = currRow.TestApproachName05 ? currRow.TestApproachName05 : "Test's Value 05";
+        } else {
+            document.getElementById('txt_SelectedText').value = "";
+            document.getElementById('lbl_TestValues01').innerHTML = "Test's Value 01";
+            document.getElementById('lbl_TestValues02').innerHTML = "Test's Value 02";
+            document.getElementById('lbl_TestValues03').innerHTML = "Test's Value 03";
+            document.getElementById('lbl_TestValues04').innerHTML = "Test's Value 04";
+            document.getElementById('lbl_TestValues05').innerHTML = "Test's Value 05";
+        }
+    });
+</script>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    @using (Html.BeginForm("UpdateResult", "TestValues", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h3 id="myModalLabel">Final Result</h3>
+                </div>
+
+                <div class="modal-body">
+
+                    @Html.EditorFor(model => model.StyleID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = Labid } })
+                    @Html.ValidationMessageFor(model => model.StyleID, "", new { @class = "text-danger" })
+
+                    @Html.DropDownList("ResultID", null, htmlAttributes: new { @class = "form-control", @id = "FinalResultDropdown" })
+                    @Html.ValidationMessageFor(model => model.ResultID, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn btn-primary" aria-hidden="true" id="xSave">Save changes</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    document.ready(function () {
+        $("#xSave").click(function (alert) {
+            var ID_A, DropA, Result_B, DropB;
+
+            x = document.getElementById("IDtoTest");
+            e = document.getElementById("FinalResultDropdown");
+
+            ID_A = x.options[x.selectedIndex].text;
+            Result_B = e.options[e.selectedIndex].text;
+
+            $.ajax({
+                type: "POST",
+                url: "/TestValues/UpdateResult",
+                data: {
+                    StyleID: ID_A,
+                    Remarks: Result_B,
+                },
+                Success: function (da) {
+                    alert(ID_A + "/" + Result_B + "Successfully updated")
+                    //alert(da)
+                }
+            })
+        })
+    })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

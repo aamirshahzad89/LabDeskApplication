@@ -1,0 +1,115 @@
+﻿@*@model IEnumerable<LabDeskApplication.Models.Log03InitialStyle>*@
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<LabDeskApplication.Models.Log03InitialStyle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Service Requests - Index <b>(Style's Data)</b></h2>
+@using (Html.BeginForm("Index", "Log03InitialStyle", FormMethod.Get))
+{
+    <p class="form-inline">
+        @Html.ActionLink("New SRF - Style", "Create", null, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Vendor's Log (Part-1)", "Index", "Log01InitialVendor", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("Article's Log (Part-2)", "Index", "Log02InitialArticle", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("Result's Log - (Values)", "Index", "TestValues", null, new { @class = "btn btn-info" })
+        &emsp;&emsp;&emsp;
+        @Html.TextBox("Search", null, new { @class = "form-control" })
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </p>
+}
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.First().StyleID)*@
+                ID#
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LogInitialArticle.StyleCode)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.First().SetupArticleType.ArticleType)*@
+                Article type
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.First().SetupColour.ColourName)*@
+                Colour
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.First().SetupUserInfo.UserName)
+                </th>*@
+            <th>
+                Sample Date
+                @*@Html.DisplayNameFor(model => model.First().SampleDate)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Sample)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Volume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SetupResult.ResultName)
+            </th>
+            <th>Tasks</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StyleID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInitialArticle.StyleCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetupArticleType.ArticleType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetupColour.ColourName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.SetupUserInfo.UserName)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.SampleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sample)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Volume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Width)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetupResult.ResultName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StyleID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.StyleID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StyleID }) |
+                    @Html.ActionLink("Proceed", "Proceed", new { id = item.StyleID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    <ul class="pagination; text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"] }))
+    </ul>

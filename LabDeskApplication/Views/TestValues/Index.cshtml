@@ -1,0 +1,111 @@
+﻿@*@model IEnumerable<LabDeskApplication.Models.TestValues>*@
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<LabDeskApplication.Models.TestValues>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Service Requests - Index <b>(Result's Data)</b></h2>
+@using (Html.BeginForm("Index", "TestValues", FormMethod.Get))
+{
+    <p class="form-inline">
+        @Html.ActionLink("New SRF - Result", "Create", null, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Vendor's Log (Part-1)", "Index", "Log01InitialVendor", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("Article's Log (Part-2)", "Index", "Log02InitialArticle", null, new { @class = "btn btn-info" })
+        @Html.ActionLink("Style's Log (Part-3)", "Index", "Log03InitialStyle", null, new { @class = "btn btn-info" })
+
+        &emsp;&emsp;&emsp;
+        @Html.TextBox("Search", null, new { @class = "form-control" })
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </p>
+}
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TestNameID)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.First().LogInitialStyle.LogInitialArticle.StyleCode)
+            </th>
+            <th style="width:250px">
+                @Html.DisplayNameFor(model => model.First().TestApproach.TestName)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.First().TestDate)*@
+                Test Date
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TestValues01)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TestValues02)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TestValues03)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TestValues04)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TestValues05)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SetupResult.ResultName)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.First().Comments)
+            </th>*@
+            <th>Tasks</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TestNameID)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInitialStyle.LogInitialArticle.StyleCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestApproach.TestName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestValues01)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestValues02)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestValues03)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestValues04)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestValues05)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetupResult.ResultName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TestNameID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.TestNameID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TestNameID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    <ul class="pagination; text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"] }))
+    </ul>

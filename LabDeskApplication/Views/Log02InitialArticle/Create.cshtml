@@ -1,0 +1,94 @@
+﻿@model LabDeskApplication.Models.Log02InitialArticle
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    var Labid = "";
+    try
+    {
+        Labid = Request.Url.Segments[3];
+    }
+    catch { }
+}
+
+@if (Labid != "")
+{
+    <h2 style="color: forestgreen">Create (Article's Data for "@Labid")</h2>
+}
+else
+{
+    <h2 style="color: hotpink">Create (Article's Data - Manual)</h2>
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Create SRF (Article's Data - Part 2)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.StyleCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StyleCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StyleCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductID, "Product Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductID", null, "--Select a Product--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.LabID, "LabID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("LabID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LabID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @if (Labid != "")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.LabID, "Lab-ID#", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LabID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = Labid } })
+                    @*@Html.DropDownList("LabID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.ValidationMessageFor(model => model.LabID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.LabID, "Lab-ID#", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("LabID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LabID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Record" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<div>
+    @Html.ActionLink("Back (SRF's Article)", "Index", null, new { @class = "btn btn-info btn-sm" }) |
+    @Html.ActionLink("Create New Product", "Create", "SetupProducts", null, new { @class = "btn btn-default btn-sm" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

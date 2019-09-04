@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@*@model IEnumerable<LabDeskApplication.Models.Log02InitialArticle>*@
+@model PagedList.IPagedList<LabDeskApplication.Models.Log02InitialArticle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Service Requests - Index <b>(Article's Data)</b></h2>
+@using (Html.BeginForm("Index", "Log02InitialArticle", FormMethod.Get))
+{
+<p class="form-inline">
+    @Html.ActionLink("New SRF - Article", "Create", null, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Vendor's Log (Part-1)", "Index", "Log01InitialVendor", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Style's Log (Part-3)", "Index", "Log03InitialStyle", null, new { @class = "btn btn-info" })
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    @Html.TextBox("Search", null, new { @class = "form-control" })
+    <input type="submit" class="btn btn-primary" value="Search" />
+</p>
+}
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.First().ArticleID)*@
+                Article #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LogInitialVendor.LabID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LogInitialVendor.Composition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SetupProduct.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().StyleCode)
+            </th>
+            <th>Tasks</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArticleID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInitialVendor.LabID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogInitialVendor.Composition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetupProduct.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StyleCode)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.ArticleID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID }) |
+                    @Html.ActionLink("Proceed", "Proceed", new { id = item.ArticleID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    <ul class="pagination; text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"] }))
+    </ul>

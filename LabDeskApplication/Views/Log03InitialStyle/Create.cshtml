@@ -1,0 +1,144 @@
+﻿@model LabDeskApplication.Models.Log03InitialStyle
+
+@{
+    ViewBag.Title = "Create";
+}
+@{
+    var Labid = "";
+    try
+    {
+        Labid = Request.Url.Segments[3];
+    }
+    catch { }
+}
+
+@if (Labid != "")
+{
+    <h2 style="color: forestgreen">Create (Style's Data for "@Labid")</h2>
+}
+else
+{
+    <h2 style="color: hotpink">Create (Style's Data for Manual)</h2>
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Create SRF (Style's Data - Part 3)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SampleDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SampleDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SampleDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sample, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sample, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Sample, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Volume, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Volume, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Volume, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Width, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Width, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Width, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ColourID, "Colour", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ColourID", null, "--Select a Colour--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ColourID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArticleTypeId, "Article Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ArticleTypeId", null, "--Select a Article Type--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ArticleTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResultID, "Result", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ResultID", null, "--Select a Result--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ResultID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserID, "Tested By", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("UserID", null, "--Select a User--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ArticleID, "ArticleID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ArticleID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ArticleID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        @if (Labid != "")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ArticleID, "Article #",htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ArticleID, "--Select an Article--", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = Labid } })
+                    @Html.ValidationMessageFor(model => model.ArticleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ArticleID, "Article #", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ArticleID", null, "--Select an Article--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ArticleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Record" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<div>
+    @Html.ActionLink("Back (SRF's Style)", "Index", null, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Create New Colour", "Create", "SetupColours", null, new { @class = "btn btn-default btn-sm" })
+    @Html.ActionLink("Create New Article", "Create", "SetupArticleTypes", null, new { @class = "btn btn-default btn-sm" })
+    @Html.ActionLink("Create New User", "Create", "SetupUserInfoes", null, new { @class = "btn btn-default btn-sm" })
+</div>

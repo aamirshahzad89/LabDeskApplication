@@ -1,0 +1,96 @@
+﻿@model LabDeskApplication.Models.TestValues
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Delete SRF (Test's Result)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LogInitialStyle.Sample)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogInitialStyle.Sample)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SetupResult.ResultName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SetupResult.ResultName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestApproach.TestName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestApproach.TestName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestValues01)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestValues01)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestValues02)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestValues02)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestValues03)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestValues03)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestValues04)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestValues04)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestValues05)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestValues05)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Back (SRF's Result)", "Index", null, new { @class = "btn btn-info" })
+        </div>
+    }
+</div>

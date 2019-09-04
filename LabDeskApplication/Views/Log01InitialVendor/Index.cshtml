@@ -1,0 +1,69 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@*@model IEnumerable<LabDeskApplication.Models.Log01InitialVendor>*@
+@model PagedList.IPagedList<LabDeskApplication.Models.Log01InitialVendor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Service Requests - Index <b>(Vendor's Data)</b></h2>
+@using (Html.BeginForm("Index", "Log01InitialVendor", FormMethod.Get))
+{
+<div class="form-inline">
+    @Html.ActionLink("New SRF - Vendor", "Create", null, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Article's Log (Part-2)", "Index", "Log02InitialArticle", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Style's Log (Part-3)", "Index", "Log03InitialStyle", null, new { @class = "btn btn-info" })
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    @Html.TextBox("Search", null, new { @class = "form-control" })
+    <input type="submit" class="btn btn-primary" value="Search" />
+</div>
+}
+<br />
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LabID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SetupVendor.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FormDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Composition)
+            </th>
+            <th>Tasks</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LabID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetupVendor.VendorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Composition)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LabID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.LabID }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LabID }) |
+                    @Html.ActionLink("Proceed", "Proceed", new { id = item.LabID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<ul class="pagination; text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"] }))
+</ul>

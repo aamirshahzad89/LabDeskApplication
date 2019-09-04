@@ -1,0 +1,26 @@
+﻿@model LabDeskApplication.Models.SetupColour
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details - About Colour</h2>
+
+<div>
+    <h4>Colour's Setup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ColourName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ColourName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ColourID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

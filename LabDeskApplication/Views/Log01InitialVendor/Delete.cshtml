@@ -1,0 +1,56 @@
+﻿@model LabDeskApplication.Models.Log01InitialVendor
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Service Request Form (Vendor's Data)</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Delete SRF (Vendor's Data - Part 1)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LabID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SetupVendor.VendorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SetupVendor.VendorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FormDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Composition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composition)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Record" class="btn btn-primary" /> |
+            @Html.ActionLink("Back (SRF's Vendor)", "Index", null, new { @class = "btn btn-info btn-sm" }) 
+        </div>
+    }
+</div>

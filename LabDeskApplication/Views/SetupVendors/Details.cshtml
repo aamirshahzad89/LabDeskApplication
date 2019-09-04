@@ -1,0 +1,32 @@
+﻿@model LabDeskApplication.Models.SetupVendor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details - About Vendor</h2>
+
+<div>
+    <h4>Vendor's Setup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorName)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VendorID }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Vendor's List", "Index", null, new { @class = "btn btn-info" })
+</p>

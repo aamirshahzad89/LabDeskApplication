@@ -1,0 +1,34 @@
+﻿@model IEnumerable<LabDeskApplication.Models.SetupColour>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add Colour", "Create", null, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Initial Log - Setup", "Index", "Log03InitialStyle", null, new { @class = "btn btn-info" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ColourName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ColourName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ColourID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ColourID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ColourID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model LabDeskApplication.Models.Log01InitialVendor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details - Lab. Service (Vendor)</h2>
+
+<div>
+    <h4>Log Initial Vendor's Data (Part 1)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LabID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SetupVendor.VendorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SetupVendor.VendorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FormDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Composition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LabID }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Lab Service (Vendor's Log)", "Index", null, new { @class = "btn btn-info btn-sm" })
+</p>
